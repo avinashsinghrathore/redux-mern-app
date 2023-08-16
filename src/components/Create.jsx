@@ -1,32 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import{useDispatch} from 'react-redux'
+import { createUser } from "../features/userDetailSlice";
 
 const Create = () => {
+  const [users, setUsers] = useState({});
+  
+  const dispatch = useDispatch()
+  
+
+  const getUserData = (e) => {
+    setUsers({ ...users, [e.target.name]: e.target.value });
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("users...", users);
+    dispatch(createUser(users))
+  }
+
   return (
     <div>
-      <form style={{width: "50%", margin: "auto"}}>
-      <div className="mb-3">
-          <label for="exampleInputName1" className="form-label">
-            Name
-          </label>
+      <form style={{ width: "50%", margin: "auto" }} onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Name</label>
           <input
             type="text"
+            name="name"
             className="form-control"
-            id="exampleInputName1"
+            onChange={getUserData}
           />
         </div>
 
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
-            Email
-          </label>
+          <label className="form-label">Email</label>
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            name="email"
+            onChange={getUserData}
           />
-          <div id="emailHelp" className="form-text">
-          </div>
+          <div className="form-text"></div>
         </div>
         <div className="mb-3">
           <label for="exampleInputAge" className="form-label">
@@ -35,28 +49,29 @@ const Create = () => {
           <input
             type="number"
             className="form-control"
-            id="exampleInputAge"
+            name="age"
+            onChange={getUserData}
           />
         </div>
-        <div className="mb-3 form-check">
+        <div className="mb-3">
           <input
-            type="checkbox"
+            type="radio"
             className="form-check-input"
-            id="exampleCheck1"
+            name="gender"
+            value="Male"
+            onChange={getUserData}
           />
-          <label className="form-check-label" for="exampleCheck1">
-            Male
-          </label>
+          <label className="form-check-label">Male</label>
         </div>
-        <div className="mb-3 form-check">
+        <div className="mb-3">
           <input
-            type="checkbox"
+            type="radio"
             className="form-check-input"
-            id="exampleCheck1"
+            name="gender"
+            value="Female"
+            onChange={getUserData}
           />
-          <label className="form-check-label" for="exampleCheck1">
-            Female
-          </label>
+          <label className="form-check-label">Female</label>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
