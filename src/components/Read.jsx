@@ -5,6 +5,7 @@ import { showUser } from "../features/userDetailSlice";
 import { Link } from "react-router-dom";
 import CustomModal from "./CustomModal";
 import { useState } from "react";
+import { deleteUser } from "../features/userDetailSlice";
 
 const Read = () => {
   const dispatch = useDispatch();
@@ -38,10 +39,10 @@ const Read = () => {
                 <button className="card-link" onClick={() => [setId(ele.id), setShowPopup(true)]}>
                   view
                 </button>
-                <Link href="#" className="card-link">
+                <Link className="card-link">
                   Edit
                 </Link>
-                <Link href="#" className="card-link">
+                <Link className="card-link" onClick={() => dispatch(deleteUser(ele.id))} >
                   Delete
                 </Link>
               </div>
