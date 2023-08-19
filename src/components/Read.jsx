@@ -39,7 +39,7 @@ const Read = () => {
                 <button className="card-link" onClick={() => [setId(ele.id), setShowPopup(true)]}>
                   view
                 </button>
-                <Link className="card-link">
+                <Link to={`/edit/${ele.id}`} className="card-link">
                   Edit
                 </Link>
                 <Link className="card-link" onClick={() => dispatch(deleteUser(ele.id))} >
