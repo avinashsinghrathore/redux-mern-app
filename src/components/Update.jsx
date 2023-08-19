@@ -2,6 +2,7 @@ import React from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
+import { updateUser } from '../features/userDetailSlice'
 
 
 const Update = () => {
@@ -28,7 +29,7 @@ const Update = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault()
-    dispatch((updateData))
+    dispatch(updateUser(updateData))
     navigate('/read')
   }
   
