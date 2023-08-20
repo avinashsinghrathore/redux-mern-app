@@ -5,24 +5,24 @@ import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [users, setUsers] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const getUserData = (e) => {
     setUsers({ ...users, [e.target.name]: e.target.value });
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("users...", users);
     dispatch(createUser(users));
-    navigate("/read")
+    navigate("/read");
   };
 
   return (
     <div>
-    <h3>Enter your data</h3>
+      <h3>Enter your data</h3>
       <form style={{ width: "50%", margin: "auto" }} onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Name</label>

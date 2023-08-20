@@ -1,43 +1,40 @@
-import React from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
-import { updateUser } from '../features/userDetailSlice'
-
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { updateUser } from "../features/userDetailSlice";
 
 const Update = () => {
-  const { id } = useParams()
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-  
-    const [updateData, setUpdateData] = useState()
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const { users, loading } = useSelector((state) => state.app)
-  
+  const [updateData, setUpdateData] = useState();
+
+  const { users, loading } = useSelector((state) => state.app);
 
   useEffect(() => {
-    if(id) {
-      const singleUser = users.filter((ele) => ele.id === id)
-      setUpdateData(singleUser[0])
+    if (id) {
+      const singleUser = users.filter((ele) => ele.id === id);
+      setUpdateData(singleUser[0]);
     }
-  }, [])
+  }, []);
 
   const newData = (e) => {
-    setUpdateData({...updateData, [e.target.name]: e.target.value})
-  }
+    setUpdateData({ ...updateData, [e.target.name]: e.target.value });
+  };
   console.log("updated Data", updateData);
 
   const handleUpdate = (e) => {
-    e.preventDefault()
-    dispatch(updateUser(updateData))
-    navigate('/read')
-  }
-  
+    e.preventDefault();
+    dispatch(updateUser(updateData));
+    navigate("/read");
+  };
 
   return (
     <div>
-    <h3>Edit your data</h3>
-      <form style={{ width: "50%", margin: "auto" }} onSubmit={handleUpdate} >
+      <h3>Edit your data</h3>
+      <form style={{ width: "50%", margin: "auto" }} onSubmit={handleUpdate}>
         <div className="mb-3">
           <label className="form-label">Name</label>
           <input
@@ -99,8 +96,7 @@ const Update = () => {
         </button>
       </form>
     </div>
- 
-  )
-}
+  );
+};
 
-export default Update
+export default Update;

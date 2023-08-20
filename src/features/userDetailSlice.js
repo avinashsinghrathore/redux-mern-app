@@ -88,13 +88,19 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-
 export const userDetail = createSlice({
   name: "userDetail",
   initialState: {
     users: [],
     loading: false,
     error: null,
+    searchData: [],
+  },
+
+  reducers: {
+    searchUser: (state, action) => {
+      state.searchData = action.payload;
+    },
   },
 
   extraReducers: {
@@ -134,11 +140,11 @@ export const userDetail = createSlice({
 
     [deleteUser.fulfilled]: (state, action) => {
       state.loading = false;
-     const { id } = action.payload;
+      const { id } = action.payload;
 
-     if(id) {
-      state.users = state.users.filter((ele) => ele.id !== id)
-     }
+      if (id) {
+        state.users = state.users.filter((ele) => ele.id !== id);
+      }
     },
 
     [deleteUser.rejected]: (state, action) => {
@@ -153,16 +159,18 @@ export const userDetail = createSlice({
 
     [updateUser.fulfilled]: (state, action) => {
       state.loading = false;
-      state.users = state.users.map((ele) => ele.id === action.payload.id ? action.payload:ele)
+      state.users = state.users.map((ele) =>
+        ele.id === action.payload.id ? action.payload : ele
+      );
     },
 
     [updateUser.rejected]: (state, action) => {
       state.loading = false;
       state.users = action.payload;
     },
-
   },
 });
 
-
 export default userDetail.reducer;
+
+export const { searchUser } = userDetail.actions;
